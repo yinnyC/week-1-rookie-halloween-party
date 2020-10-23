@@ -5,6 +5,11 @@
 		<title>Halloween Party</title>
 	</head>
 	<body>
-		<h1>Happy Halloween {{myname}}!</h1>
+		<h2>Guests</h2>
+		<ul>
+			{% for guest in guestNames %}
+			<li>{{guest}}</li>
+			{% endfor %}
+		</ul>
 	</body>
 </html>

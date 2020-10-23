@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8" />
+		<title>Halloween Party</title>
+	</head>
+	<body>
+		<h2>RSVP</h2>
+		<h3>guests who are rsvp'd</h3>
+		<ul>
+			{% for guest in guests %} {% if guest.rsvp == True %}
+			<li>{{guest.name}}</li>
+			{% endif %} {% endfor %}
+		</ul>
+		<h3>guests who are not rsvp'd</h3>
+		<ul>
+			{% for guest in guests %} {% if guest.rsvp == False %}
+			<li>{{guest.name}}</li>
+			{% endif %} {% endfor %}
+		</ul>
+	</body>
+</html>
