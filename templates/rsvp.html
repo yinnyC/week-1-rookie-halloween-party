@@ -6,15 +6,43 @@
 	</head>
 	<body>
 		<h2>RSVP</h2>
+		<form action="/guests" method="POST">
+			<label for="name">
+				Full Name<br />
+				<input type="text" name="name" />
+			</label>
+			<br />
+			<label for="email">
+				Email<br />
+				<input type="email" name="email" required />
+			</label>
+			<br />
+			<label for="plus-one">
+				The Name of your Plus-one, if any.<br />
+				<input type="text" name="plus-one" />
+			</label>
+			<br />
+			<label for="user-name">
+				Phone Number <br />
+				<input type="tel" name="phone" />
+			</label>
+			<br />
+			<label for="costume">
+				Costume Description:<br />
+				<input type="text" name="costume" />
+			</label>
+			<br />
+			<input type="submit" />
+		</form>
 		<h3>guests who are rsvp'd</h3>
 		<ul>
-			{% for guest in guests %} {% if guest.rsvp == True %}
+			{% for guest in guests %} {% if guest.rsvp %}
 			<li>{{guest.name}}</li>
 			{% endif %} {% endfor %}
 		</ul>
 		<h3>guests who are not rsvp'd</h3>
 		<ul>
-			{% for guest in guests %} {% if guest.rsvp == False %}
+			{% for guest in guests %} {% if not guest.rsvp %}
 			<li>{{guest.name}}</li>
 			{% endif %} {% endfor %}
 		</ul>

@@ -7,8 +7,16 @@
 	<body>
 		<h2>Guests</h2>
 		<ul>
-			{% for guest in guestNames %}
-			<li>{{guest}}</li>
+			{% for guest in guests %}
+			<li>
+				{{ guest.name }}
+				<ul>
+					<li>is bringing {{ guest.plus_one }}</li>
+					<li>is going to dress up as {{ guest.costume }}</li>
+					<li>phone number {{ guest.number }}</li>
+					<li>email {{ guest.email }}</li>
+				</ul>
+			</li>
 			{% endfor %}
 		</ul>
 	</body>

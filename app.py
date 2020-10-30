@@ -2,8 +2,9 @@
 # ------------------------------------
 # Import the Libraries
 # ------------------------------------
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from random import choice
+from guests import Guest
 # ------------------------------------
 # Declare Variables and Instances
 # ------------------------------------
@@ -13,12 +14,12 @@ myName = "Yin"
 date, time = ("Oct. 31st, Sat", "1pm")
 
 # Generate Guest List
-guestNameList = ["Sid", "Starlight", "Yin",
-                 "Rick", "Jconr", "Merissa", "Logan", "Tian"]
-rsvpList = [choice([True, False]) for _ in range(len(guestNameList))]
+# guestNameList = ["Sid", "Starlight", "Yin",
+#                  "Rick", "Jconr", "Merissa", "Logan", "Tian"]
+# rsvpList = [choice([True, False]) for _ in range(len(guestNameList))]
 guests = []
-for (name, status) in zip(guestNameList, rsvpList):
-    guests.append({'name': name, 'rsvp': status})
+# for (name, status) in zip(guestNameList, rsvpList):
+#     guests.append({'name': name, 'rsvp': status})
 
 # ------------------------------------
 # Define Functions for Routes
@@ -37,10 +38,19 @@ def aboutpage():
     return render_template('about.html', date=date, time=time)
 
 
-@app.route('/guests')
+@app.route('/guests', methods=['GET', 'POST'])
 def guestspage():
     """Return template and guests' name for guests."""
-    return render_template('guests.html', guestNames=guestNameList)
+    if request.method == 'POST':
+        guest_name = request.form.get('name')
+        guest_email = request.form.get('email')
+        guest_plus_one = request.form.get('plus-one')
+        guest_phone = request.form.get('phone')
+        guest_costume = request.form.get('costume')
+        guest = Guest(guest_name, guest_email, guest_plus_one,
+                      guest_phone, guest_costume)
+        guests.append(guest)
+        return render_template('guests.html', guests=guests)
 
 
 @app.route('/rsvp')
