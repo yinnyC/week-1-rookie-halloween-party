@@ -51,6 +51,8 @@ def guestspage():
                       guest_phone, guest_costume)
         guests.append(guest)
         return render_template('guests.html', guests=guests)
+    else:
+        return render_template('guests.html')
 
 
 @app.route('/rsvp')
